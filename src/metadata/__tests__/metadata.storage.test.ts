@@ -5,6 +5,7 @@ import {
     putProperty,
     putSchema,
 } from '../metadata.storage';
+import { IsNumberProperty, IsStringProperty } from '../../schema';
 
 describe('MetadataStorage', () => {
     describe('getSchema', () => {
@@ -19,14 +20,16 @@ describe('MetadataStorage', () => {
                 foo!: string;
             }
 
-            const schema = {
-                foo: {
-                    decorator: DecoratorType.IsString,
-                    options: {
-                        nullable: false,
-                        optional: false,
-                    },
+            const foo: IsStringProperty = {
+                decorator: DecoratorType.IsString,
+                options: {
+                    nullable: false,
+                    optional: false,
                 },
+            };
+
+            const schema = {
+                foo,
             };
             putSchema(Example, schema);
 
@@ -46,16 +49,16 @@ describe('MetadataStorage', () => {
                 foo!: string;
             }
 
-            const property = {
+            const foo: IsStringProperty = {
                 decorator: DecoratorType.IsString,
                 options: {
                     nullable: false,
                     optional: false,
                 },
             };
-            putProperty(Example, 'foo', property);
+            putProperty(Example, 'foo', foo);
 
-            expect(getProperty(Example, 'foo')).toEqual(property);
+            expect(getProperty(Example, 'foo')).toEqual(foo);
         });
         it('aggregates property if multiple property exist', () => {
             class Example {
@@ -63,25 +66,25 @@ describe('MetadataStorage', () => {
                 bar!: number;
             }
 
-            const property1 = {
+            const foo: IsStringProperty = {
                 decorator: DecoratorType.IsString,
                 options: {
                     nullable: false,
                     optional: false,
                 },
             };
-            const property2 = {
+            const bar: IsNumberProperty = {
                 decorator: DecoratorType.IsNumber,
                 options: {
                     nullable: true,
                     optional: true,
                 },
             };
-            putProperty(Example, 'foo', property1);
-            putProperty(Example, 'bar', property2);
+            putProperty(Example, 'foo', foo);
+            putProperty(Example, 'bar', bar);
 
-            expect(getProperty(Example, 'foo')).toEqual(property1);
-            expect(getProperty(Example, 'bar')).toEqual(property2);
+            expect(getProperty(Example, 'foo')).toEqual(foo);
+            expect(getProperty(Example, 'bar')).toEqual(bar);
         });
     });
 });
