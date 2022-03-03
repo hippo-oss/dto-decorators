@@ -1,3 +1,4 @@
+export * from './base.options';
 export * from './is-boolean.options';
 export * from './is-date-string.options';
 export * from './is-date.options';

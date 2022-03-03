@@ -1,1 +1,3 @@
-export type PropertyDecoratorTransformer = (decorator: PropertyDecorator) => PropertyDecorator;
+export interface PropertyDecoratorTransformer<Options> {
+    (options: Options, decorator: PropertyDecorator): PropertyDecorator;
+}

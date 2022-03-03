@@ -55,16 +55,19 @@ export const FACTORIES: DTODecoratorFactories = {
 /* The factories can be transformed into an alternate implementation.
  */
 export type DTODecoratorTransformers = {
-    [Key in keyof DTODecoratorFactories]?: PropertyDecoratorTransformer;
+    [Key in keyof DTODecoratorFactories]?: PropertyDecoratorTransformer<unknown>;
 };
 
 /* Applying a transformer to a factory produces a new factory.
  */
 export function applyTransformer<Options>(
     factory: PropertyDecoratorFactory<Options>,
-    transformer: PropertyDecoratorTransformer = (decorator: PropertyDecorator) => decorator,
+    transformer?: PropertyDecoratorTransformer<Options>,
 ): PropertyDecoratorFactory<Options> {
-    return (options: Options) => transformer(factory(options));
+    return (options: Options) => {
+        const decorator = factory(options);
+        return transformer !== undefined ? transformer(options, decorator) : decorator;
+    };
 }
 
 /* An implementation can produce its own factories using `buildDecoratorFactories` to map over the factories.
