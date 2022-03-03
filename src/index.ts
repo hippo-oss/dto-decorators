@@ -1,5 +1,6 @@
 import 'reflect-metadata';
 
+export * from './api';
 export * from './decorators';
 export * from './enums';
 export * from './metadata';
