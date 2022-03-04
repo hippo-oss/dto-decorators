@@ -1,30 +1,46 @@
-import { IsString, applyTransformer, withDeprecationWarnings } from '..';
+import {
+    IsString as DefaultIsString,
+    applyTransformer,
+    withDeprecationWarnings,
+} from '..';
 
 describe('warnIfDeprecated', () => {
     it('produces new decorator factories', () => {
-        const onWarning = jest.fn();
+        const spy = jest.spyOn(process, 'emitWarning');
 
-        const IsStringWithDeprecationWarning = applyTransformer(
-            IsString,
-            withDeprecationWarnings(onWarning),
+        const IsString = applyTransformer(
+            DefaultIsString,
+            withDeprecationWarnings,
         );
 
         class Example {
-            @IsStringWithDeprecationWarning({
+            @IsString({
                 deprecated: true,
             })
             foo!: string;
 
-            @IsStringWithDeprecationWarning({
+            @IsString({
             })
             bar!: string;
+
+            @IsString({
+                deprecated: true,
+            })
+            baz!: string;
         }
 
         const example = new Example();
         example.foo = 'warning expected';
+        example.foo = 'no warning expected';
         example.bar = 'no warning expected';
+        example.baz = 'warning expected';
 
-        expect(onWarning).toHaveBeenCalledTimes(1);
-        expect(onWarning).toHaveBeenCalledWith('Example.foo is deprecated.');
+        expect(spy).toHaveBeenCalledTimes(2);
+        expect(spy).toHaveBeenCalledWith('Example.foo is deprecated.', {
+            type: 'DeprecationWarning',
+        });
+        expect(spy).toHaveBeenCalledWith('Example.baz is deprecated.', {
+            type: 'DeprecationWarning',
+        });
     });
 });

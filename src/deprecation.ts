@@ -1,5 +1,5 @@
 import { BaseOptions } from './options';
-import { PropertyDecoratorTransformer, Target } from './types';
+import { Target } from './types';
 
 export interface Warnings {
     (message: string): void;
@@ -8,26 +8,39 @@ export interface Warnings {
 /* Define a property decorator transformation that warns on deprecation.
  */
 export function withDeprecationWarnings<Options extends BaseOptions>(
-    // eslint-disable-next-line no-console
-    onWarning: Warnings = console.warn,
-): PropertyDecoratorTransformer<Options> {
-    return (options: Options): PropertyDecorator => (
+    { deprecated }: Options,
+): PropertyDecorator {
+    return (
         target: Target,
         propertyKey: string | symbol,
     ): void => {
+        if (!deprecated) {
+            return;
+        }
+
         let value: unknown;
 
-        const getter = () => value;
-        const setter = (newValue: unknown) => {
-            onWarning(`${target.constructor.name}.${String(propertyKey)} is deprecated.`);
-            value = newValue;
-        };
+        function setter(newValue: unknown): void {
+            const self = setter as unknown as { called?: boolean };
 
-        if (options.deprecated) {
-            Object.defineProperty(target, propertyKey, {
-                get: getter,
-                set: setter,
-            });
+            if (!self.called) {
+                /* NB: the status of `util.deprecate` seems to be that it is supported but will not be maintained,
+                 * meaning that it's probably better to use `process.emitWarning`.
+                 */
+                process.emitWarning(
+                    `${target.constructor.name}.${String(propertyKey)} is deprecated.`,
+                    {
+                        type: 'DeprecationWarning',
+                    },
+                );
+                self.called = true;
+            }
+            value = newValue;
         }
+
+        Object.defineProperty(target, propertyKey, {
+            get: () => value,
+            set: setter,
+        });
     };
 }
