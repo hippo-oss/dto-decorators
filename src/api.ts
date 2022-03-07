@@ -5,41 +5,18 @@ import {
     IsEnum,
     IsInteger,
     IsNested,
+    IsNumber,
     IsString,
     IsUUID,
 } from './decorators';
 import {
-    IsBooleanOptions,
-    IsDateOptions,
-    IsDateStringOptions,
-    IsEnumOptions,
-    IsIntegerOptions,
-    IsNestedOptions,
-    IsStringOptions,
-    IsUUIDOptions,
-} from './options';
-import {
-    PropertyDecoratorFactory,
-    PropertyDecoratorTransformer,
+    DTODecoratorFactories,
+    DTODecoratorName,
+    composePropertyDecoratorFactories,
+    selectPropertyDecoratorFactories,
 } from './types';
 
-/* The library provides a set of decorator factories.
- *
- * Each factory takes options and return a `PropertyDecorator`. These factories can be imported directly and,
- * more importantly, can be referenced as a single type that can be  *tranformed* into another implementation.
- */
-export interface DTODecoratorFactories {
-    IsBoolean: PropertyDecoratorFactory<IsBooleanOptions>;
-    IsDate: PropertyDecoratorFactory<IsDateOptions>;
-    IsDateString: PropertyDecoratorFactory<IsDateStringOptions>;
-    IsEnum: PropertyDecoratorFactory<IsEnumOptions>;
-    IsInteger: PropertyDecoratorFactory<IsIntegerOptions>;
-    IsNested: PropertyDecoratorFactory<IsNestedOptions>;
-    IsString: PropertyDecoratorFactory<IsStringOptions>;
-    IsUUID: PropertyDecoratorFactory<IsUUIDOptions>;
-}
-
-/* The factories provided by this library (only) write options as metadata.
+/* The library provides a baseline set of factories that persists options using `reflect-metadata`.
  */
 export const FACTORIES: DTODecoratorFactories = {
     IsBoolean,
@@ -48,43 +25,26 @@ export const FACTORIES: DTODecoratorFactories = {
     IsEnum,
     IsInteger,
     IsNested,
+    IsNumber,
     IsString,
     IsUUID,
 };
 
-/* The factories can be transformed into an alternate implementation.
+/* Consumers that wish to define their own behavior may compose sets of these decorator factories together.
  */
-export type DTODecoratorTransformers = {
-    [Key in keyof DTODecoratorFactories]?: PropertyDecoratorTransformer<unknown>;
-};
-
-/* Applying a transformer to a factory produces a new factory.
- */
-export function applyTransformer<Options>(
-    factory: PropertyDecoratorFactory<Options>,
-    transformer?: PropertyDecoratorTransformer<Options>,
-): PropertyDecoratorFactory<Options> {
-    return (options: Options) => {
-        const decorator = factory(options);
-        return transformer !== undefined ? transformer(options, decorator) : decorator;
-    };
-}
-
-/* An implementation can produce its own factories using `buildDecoratorFactories` to map over the factories.
- */
-export function buildDecoratorFactories(
-    transformers: DTODecoratorTransformers,
-    decorators: DTODecoratorFactories = FACTORIES,
+export function composeDecoratorFactories(
+    factories: DTODecoratorFactories[],
 ): DTODecoratorFactories {
-    return Object.fromEntries(
-        Object.entries(decorators).map(
-            ([key, factory]: [string, PropertyDecoratorFactory<unknown>]) => ([
-                key,
-                applyTransformer(
-                    factory,
-                    transformers[key as keyof DTODecoratorFactories],
+    return Object.keys(FACTORIES).reduce(
+        (acc, name) => ({
+            ...acc,
+            [name]: composePropertyDecoratorFactories(
+                selectPropertyDecoratorFactories(
+                    name as unknown as DTODecoratorName,
+                    factories,
                 ),
-            ]),
-        ),
-    ) as unknown as DTODecoratorFactories;
+            ),
+        }),
+        {} as DTODecoratorFactories,
+    );
 }

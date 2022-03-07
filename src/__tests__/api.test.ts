@@ -1,28 +1,31 @@
-import { buildDecoratorFactories, FACTORIES, PropertyDecoratorFactory } from '..';
+import { composeDecoratorFactories, FACTORIES, PropertyDecoratorFactory } from '..';
 
-describe('buildDecoratorFactories', () => {
+describe('composeDecoratorFactories', () => {
     it('produces new decorator factories', () => {
-        const noop = () => { };
-        const transformer = () => noop;
+        const spy = jest.fn();
+        const factory = () => spy;
 
-        const factories = buildDecoratorFactories({
-            IsBoolean: transformer,
-            IsDate: transformer,
-            IsDateString: transformer,
-            IsEnum: transformer,
-            IsInteger: transformer,
-            IsNested: transformer,
-            IsString: transformer,
-            IsUUID: transformer,
-        });
+        const factories = composeDecoratorFactories([{
+            IsBoolean: factory,
+            IsDate: factory,
+            IsDateString: factory,
+            IsEnum: factory,
+            IsInteger: factory,
+            IsNested: factory,
+            IsNumber: factory,
+            IsString: factory,
+            IsUUID: factory,
+        }]);
 
         expect(factories).toBeDefined();
         expect(Object.keys(FACTORIES)).toEqual(Object.keys(factories));
 
         Object.values(factories).forEach(
-            (factory: PropertyDecoratorFactory<unknown>) => {
-                const decorator = factory({});
-                expect(decorator).toEqual(noop);
+            (item) => {
+                const decorator = (item as unknown as PropertyDecoratorFactory<unknown>)({});
+                spy.mockReset();
+                decorator({}, '');
+                expect(spy).toHaveBeenCalled();
             },
         );
 

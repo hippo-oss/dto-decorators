@@ -1,4 +1,3 @@
-import { DecoratorType } from '../../enums';
 import { IsInteger } from '..';
 
 import { getProperty } from '../../metadata';
@@ -27,7 +26,7 @@ describe('decorators', () => {
 
             const property = getProperty(Example, 'foo');
 
-            expect(property?.decorator).toEqual(DecoratorType.IsInteger);
+            expect(property?.decorator).toEqual('IsInteger');
             expect(property?.options).toMatchObject({
                 maxValue: 100,
                 minValue: 0,

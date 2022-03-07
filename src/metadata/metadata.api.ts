@@ -1,5 +1,6 @@
+import { isClass } from '../options';
 import { SchemaProperty } from '../schema';
-import { isClass, Target } from '../types';
+import { Target } from '../types';
 import { putProperty } from './metadata.storage';
 
 /* Decorate a property with the given options.

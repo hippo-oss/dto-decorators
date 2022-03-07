@@ -1,5 +1,5 @@
-import { BaseOptions } from './options';
-import { Target } from './types';
+import { BaseOptions } from '../options';
+import { Target } from '../types';
 
 export interface Warnings {
     (message: string): void;

@@ -1,11 +1,10 @@
-import { DecoratorType } from '../../enums';
 import {
     getProperty,
     getSchema,
     putProperty,
     putSchema,
 } from '../metadata.storage';
-import { IsNumberProperty, IsStringProperty } from '../../schema';
+import { IsSchemaProperty } from '../../schema';
 
 describe('MetadataStorage', () => {
     describe('getSchema', () => {
@@ -20,8 +19,8 @@ describe('MetadataStorage', () => {
                 foo!: string;
             }
 
-            const foo: IsStringProperty = {
-                decorator: DecoratorType.IsString,
+            const foo: IsSchemaProperty<'IsString'> = {
+                decorator: 'IsString',
                 options: {
                     nullable: false,
                     optional: false,
@@ -49,8 +48,8 @@ describe('MetadataStorage', () => {
                 foo!: string;
             }
 
-            const foo: IsStringProperty = {
-                decorator: DecoratorType.IsString,
+            const foo: IsSchemaProperty<'IsString'> = {
+                decorator: 'IsString',
                 options: {
                     nullable: false,
                     optional: false,
@@ -66,15 +65,15 @@ describe('MetadataStorage', () => {
                 bar!: number;
             }
 
-            const foo: IsStringProperty = {
-                decorator: DecoratorType.IsString,
+            const foo: IsSchemaProperty<'IsString'> = {
+                decorator: 'IsString',
                 options: {
                     nullable: false,
                     optional: false,
                 },
             };
-            const bar: IsNumberProperty = {
-                decorator: DecoratorType.IsNumber,
+            const bar: IsSchemaProperty<'IsNumber'> = {
+                decorator: 'IsNumber',
                 options: {
                     nullable: true,
                     optional: true,

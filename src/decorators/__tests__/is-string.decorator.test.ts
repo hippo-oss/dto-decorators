@@ -1,4 +1,3 @@
-import { DecoratorType } from '../../enums';
 import { IsString } from '..';
 
 import { getProperty } from '../../metadata';
@@ -26,7 +25,7 @@ describe('decorators', () => {
 
             const property = getProperty(Example, 'foo');
 
-            expect(property?.decorator).toEqual(DecoratorType.IsString);
+            expect(property?.decorator).toEqual('IsString');
             expect(property?.options).toMatchObject({
                 optional: false,
                 pattern: /[a-z]+/,

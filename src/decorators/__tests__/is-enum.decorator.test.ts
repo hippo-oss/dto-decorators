@@ -1,4 +1,3 @@
-import { DecoratorType } from '../../enums';
 import { IsEnum } from '..';
 
 import { getProperty } from '../../metadata';
@@ -31,7 +30,7 @@ describe('decorators', () => {
 
             const property = getProperty(Example, 'foo');
 
-            expect(property?.decorator).toEqual(DecoratorType.IsEnum);
+            expect(property?.decorator).toEqual('IsEnum');
             expect(property?.options).toMatchObject({
                 enum: Foo,
                 enumName: 'Foo',

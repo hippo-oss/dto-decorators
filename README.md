@@ -6,8 +6,8 @@ DTO type decorators.
 ## What Problem Does This Project Solve?
 
 TypeScript applications must take special care at their boundaries to ensure that runtime data matches its type
-definitions. For example, many applications will extract JSON from an HTTP request might and (naively) cast this data
-to a TypeScript type:
+definitions. For example, many applications will extract JSON from an HTTP request might and (naively) cast this
+data to a TypeScript type:
 
 ```ts
 const input = await request.json() as MyInputType
@@ -45,7 +45,7 @@ This library exports a handful of decorators and corresponding options. DTO impl
 class properties with the appropriate type and options:
 
 ```ts
-import { IsInteger } from '@hippo-oss/dto-decorator's;
+import { IsInteger } from '@hippo-oss/dto-decorators';
 
 class Example {
 
