@@ -1,4 +1,3 @@
-import { DecoratorType } from '../../enums';
 import { IsBoolean } from '..';
 
 import { getProperty } from '../../metadata';
@@ -36,7 +35,7 @@ describe('decorators', () => {
 
             const property = getProperty(Example, 'foo');
 
-            expect(property?.decorator).toEqual(DecoratorType.IsBoolean);
+            expect(property?.decorator).toEqual('IsBoolean');
             expect(property?.options).toMatchObject({
                 deprecated: false,
                 description: 'Description',

@@ -1,4 +1,3 @@
-import { DecoratorType } from '../../enums';
 import { IsUUID } from '..';
 
 import { getProperty } from '../../metadata';
@@ -26,7 +25,7 @@ describe('decorators', () => {
 
             const property = getProperty(Example, 'foo');
 
-            expect(property?.decorator).toEqual(DecoratorType.IsUUID);
+            expect(property?.decorator).toEqual('IsUUID');
             expect(property?.options).toMatchObject({
                 optional: false,
                 nullable: false,

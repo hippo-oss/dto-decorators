@@ -1,4 +1,3 @@
-import { DecoratorType } from '../../enums';
 import { IsDate } from '..';
 
 import { getProperty } from '../../metadata';
@@ -26,7 +25,7 @@ describe('decorators', () => {
 
             const property = getProperty(Example, 'foo');
 
-            expect(property?.decorator).toEqual(DecoratorType.IsDate);
+            expect(property?.decorator).toEqual('IsDate');
             expect(property?.options).toMatchObject({
                 format: 'date-time',
                 optional: false,
