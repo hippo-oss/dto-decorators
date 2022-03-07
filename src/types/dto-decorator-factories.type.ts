@@ -4,7 +4,7 @@ import { PropertyDecoratorFactory } from './property-decorator-factory.type';
 import { Target } from './target.type';
 
 /* Consumers of the library will import (or create) a suite of factories that create property decorators for the
- * suppored set of decorators and options.
+ * supported set of decorators and options.
  */
 export type DTODecoratorFactories = {
     [Name in DTODecoratorName]: PropertyDecoratorFactory<DTODecoratorOptions<Name>>;
