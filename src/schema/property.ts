@@ -1,7 +1,7 @@
 import { DTODecoratorName, DTODecoratorOptions } from '../types';
 
 export interface IsSchemaProperty<Name extends DTODecoratorName> {
-    decorator: Name,
+    name: Name,
     options: DTODecoratorOptions<Name>,
 }
 
