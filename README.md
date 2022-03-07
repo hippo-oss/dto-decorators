@@ -1,6 +1,6 @@
 # dto-decorators
 
-DTO type decorators.
+DTO type decorators and factories.
 
 
 ## What Problem Does This Project Solve?
@@ -39,14 +39,34 @@ This library aims to provide an implementation-agnostic decorator API that can b
 decorators across multiple library implementations without introducing rendundant decorator information.
 
 
-## Decorator Usage
+## Decorator Flavors
 
-This library exports a handful of decorators and corresponding options. DTO implementations simply decorator
-class properties with the appropriate type and options:
+This library comes with three flavors of decorators that rely on a minimal set of third-party dependencies.
+
+ - `NOOP_DECORATORS` do nothing; they simply implement the decorator API contract.
+
+ - `METADATA_DECORATORS` persist store metadata using `reflect-metadata`; other systems may use this persistence to
+   implement runtime logic that is aware of decorated attributes.
+
+ - `DEPRECATION_DECORATORS` override property settings so that deprecated fields product system warnings.
+
+
+## Decorator Composition
+
+The real power of `dto-decorators` comes from composing these decorators flavors with each other -- or with implementations
+that use other third-party dependencies. Composition is as easy as:
 
 ```ts
-import { IsInteger } from '@hippo-oss/dto-decorators';
+import { composeDecoratorFactories, METADATA_DECORATORS, DEPRECATE_DECORATORS } from '..';
 
+const decorators = composeDecoratorFactories([
+    METADATA_DECORATORS,
+    DEPRECATE_DECORATORS,
+]);
+
+const { IsInteger } = decorators;
+
+```ts
 class Example {
 
     @IsInteger({
@@ -56,7 +76,7 @@ class Example {
 }
 ```
 
-## Decorators
+## Avaialble Decorators
 
 The following decorators are supported:
 

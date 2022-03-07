@@ -1,4 +1,6 @@
-import { IsEnum, IsString, IsNested, IsNumber, IsUUID } from '..';
+import { METADATA_DECORATORS } from '../metadata.factory';
+
+const { IsEnum, IsString, IsNested, IsNumber, IsUUID } = METADATA_DECORATORS;
 
 export enum State {
     CA = 'CA',

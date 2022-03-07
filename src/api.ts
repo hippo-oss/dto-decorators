@@ -1,14 +1,4 @@
-import {
-    IsBoolean,
-    IsDate,
-    IsDateString,
-    IsEnum,
-    IsInteger,
-    IsNested,
-    IsNumber,
-    IsString,
-    IsUUID,
-} from './decorators';
+import { NOOP_DECORATORS } from './noop';
 import {
     DTODecoratorFactories,
     DTODecoratorName,
@@ -16,26 +6,12 @@ import {
     selectPropertyDecoratorFactories,
 } from './types';
 
-/* The library provides a baseline set of factories that persists options using `reflect-metadata`.
- */
-export const FACTORIES: DTODecoratorFactories = {
-    IsBoolean,
-    IsDate,
-    IsDateString,
-    IsEnum,
-    IsInteger,
-    IsNested,
-    IsNumber,
-    IsString,
-    IsUUID,
-};
-
 /* Consumers that wish to define their own behavior may compose sets of these decorator factories together.
  */
 export function composeDecoratorFactories(
     factories: DTODecoratorFactories[],
 ): DTODecoratorFactories {
-    return Object.keys(FACTORIES).reduce(
+    return Object.keys(NOOP_DECORATORS).reduce(
         (acc, name) => ({
             ...acc,
             [name]: composePropertyDecoratorFactories(

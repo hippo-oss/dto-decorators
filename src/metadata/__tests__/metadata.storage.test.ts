@@ -20,7 +20,7 @@ describe('MetadataStorage', () => {
             }
 
             const foo: IsSchemaProperty<'IsString'> = {
-                decorator: 'IsString',
+                name: 'IsString',
                 options: {
                     nullable: false,
                     optional: false,
@@ -49,7 +49,7 @@ describe('MetadataStorage', () => {
             }
 
             const foo: IsSchemaProperty<'IsString'> = {
-                decorator: 'IsString',
+                name: 'IsString',
                 options: {
                     nullable: false,
                     optional: false,
@@ -66,14 +66,14 @@ describe('MetadataStorage', () => {
             }
 
             const foo: IsSchemaProperty<'IsString'> = {
-                decorator: 'IsString',
+                name: 'IsString',
                 options: {
                     nullable: false,
                     optional: false,
                 },
             };
             const bar: IsSchemaProperty<'IsNumber'> = {
-                decorator: 'IsNumber',
+                name: 'IsNumber',
                 options: {
                     nullable: true,
                     optional: true,

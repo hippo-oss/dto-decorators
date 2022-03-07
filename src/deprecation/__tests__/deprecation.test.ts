@@ -1,17 +1,10 @@
-import {
-    IsString as DefaultIsString,
-    composePropertyDecoratorFactories,
-} from '../..';
-import { withDeprecationWarnings } from '..';
+import { DEPRECATION_DECORATORS } from '../..';
 
 describe('warnIfDeprecated', () => {
     it('produces new decorator factories', () => {
         const spy = jest.spyOn(process, 'emitWarning');
 
-        const IsString = composePropertyDecoratorFactories([
-            DefaultIsString,
-            withDeprecationWarnings,
-        ]);
+        const { IsString } = DEPRECATION_DECORATORS;
 
         class Example {
             @IsString({

@@ -1,4 +1,4 @@
-import { composeDecoratorFactories, FACTORIES, PropertyDecoratorFactory } from '..';
+import { composeDecoratorFactories, NOOP_DECORATORS, PropertyDecoratorFactory } from '..';
 
 describe('composeDecoratorFactories', () => {
     it('produces new decorator factories', () => {
@@ -18,7 +18,7 @@ describe('composeDecoratorFactories', () => {
         }]);
 
         expect(factories).toBeDefined();
-        expect(Object.keys(FACTORIES)).toEqual(Object.keys(factories));
+        expect(Object.keys(NOOP_DECORATORS)).toEqual(Object.keys(factories));
 
         Object.values(factories).forEach(
             (item) => {

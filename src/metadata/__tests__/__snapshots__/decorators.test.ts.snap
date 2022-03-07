@@ -3,7 +3,7 @@
 exports[`decorators define Address properties 1`] = `
 Object {
   "city": Object {
-    "decorator": "IsString",
+    "name": "IsString",
     "options": Object {
       "description": "The address's city.",
       "example": "Washington",
@@ -11,7 +11,7 @@ Object {
     },
   },
   "id": Object {
-    "decorator": "IsUUID",
+    "name": "IsUUID",
     "options": Object {
       "description": "The address's persistent id",
       "example": "00000000-0000-4000-8000-000000000000",
@@ -19,7 +19,7 @@ Object {
     },
   },
   "location": Object {
-    "decorator": "IsNested",
+    "name": "IsNested",
     "options": Object {
       "description": "The location of the address.",
       "optional": true,
@@ -27,7 +27,7 @@ Object {
     },
   },
   "state": Object {
-    "decorator": "IsEnum",
+    "name": "IsEnum",
     "options": Object {
       "description": "The address's state.",
       "enum": Object {
@@ -41,7 +41,7 @@ Object {
     },
   },
   "street": Object {
-    "decorator": "IsString",
+    "name": "IsString",
     "options": Object {
       "description": "The address's street location",
       "example": "1600 Pennsylvania Ave",
@@ -49,7 +49,7 @@ Object {
     },
   },
   "zipcode": Object {
-    "decorator": "IsString",
+    "name": "IsString",
     "options": Object {
       "description": "The address's zipcode.",
       "example": "20500-0004",
@@ -63,7 +63,7 @@ Object {
 exports[`decorators define Location properties 1`] = `
 Object {
   "latitude": Object {
-    "decorator": "IsNumber",
+    "name": "IsNumber",
     "options": Object {
       "description": "The latitude of the location",
       "example": 38.89789,
@@ -73,7 +73,7 @@ Object {
     },
   },
   "longitude": Object {
-    "decorator": "IsNumber",
+    "name": "IsNumber",
     "options": Object {
       "description": "The longitude of location.",
       "example": -77.03651,
