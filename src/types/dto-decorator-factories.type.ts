@@ -13,11 +13,13 @@ export type DTODecoratorFactories = {
 /* Multiple property decorators can be composed into a new property decorator.
  */
 export function composePropertyDecorators(
-    decorators: PropertyDecorator[],
+    decorators: Array<PropertyDecorator | undefined>,
 ): PropertyDecorator {
     return (target: Target, propertyKey: string | symbol): void => {
         for (const decorator of decorators) {
-            decorator(target, propertyKey);
+            if (decorator !== undefined) {
+                decorator(target, propertyKey);
+            }
         }
     };
 }
