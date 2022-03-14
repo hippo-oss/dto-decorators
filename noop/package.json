@@ -1,0 +1,4 @@
+{
+    "main": "../dist/noop.js",
+    "types": "../dist/noop.d.ts"
+}
