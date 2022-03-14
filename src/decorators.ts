@@ -16,3 +16,15 @@ export const NOOP_DECORATORS: DTODecoratorFactories = {
     IsString: noopFactory,
     IsUUID: noopFactory,
 };
+
+export const {
+    IsBoolean,
+    IsDate,
+    IsDateString,
+    IsEnum,
+    IsInteger,
+    IsNested,
+    IsNumber,
+    IsString,
+    IsUUID,
+} = NOOP_DECORATORS;

@@ -62,11 +62,11 @@ The real power of `dto-decorators` comes from composing these decorators flavors
 that use other third-party dependencies. Composition is as easy as:
 
 ```ts
-import { composeDecoratorFactories, METADATA_DECORATORS, DEPRECATE_DECORATORS } from '..';
+import { composeDecoratorFactories } from '..';
 
 const decorators = composeDecoratorFactories([
-    METADATA_DECORATORS,
-    DEPRECATE_DECORATORS,
+    MY_DECORATORS,
+    SOME_OTHER_DECORATORS,
 ]);
 
 const { IsInteger } = decorators;

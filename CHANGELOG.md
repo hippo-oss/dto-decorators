@@ -1,5 +1,9 @@
 # Changelog
 
+## [0.3.0]
+
+ - Provide `noop` decorator export using destructuing.
+
 ## [0.2.0]
 
  - Moves metadata flavor to `@hippo-oss/metadata-decorators`.
