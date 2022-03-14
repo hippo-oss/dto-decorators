@@ -2,6 +2,8 @@
 
 DTO type decorators and factories.
 
+Defines types for decorating DTO classes and a mechanism for composing multiple implementations of these decorators.
+
 
 ## What Problem Does This Project Solve?
 
@@ -41,11 +43,17 @@ decorators across multiple library implementations without introducing rendundan
 
 ## Decorator Flavors
 
-This library comes with three flavors of decorators that rely on a minimal set of third-party dependencies.
+This library defines a set of types that can be used to produce implementation-specific decorator "flavors", including
+a `noop` implementation (provided in this library) and several others (provided in other libraries).
 
- - `NOOP_DECORATORS` do nothing; they simply implement the decorator API contract.
+ - [class-decorators](https://github.com/hippo-oss/class-decorators) implements a flavor that uses `class-transformer`
+   and `class-validator` to convert and validate DTO types.
 
- - `DEPRECATION_DECORATORS` override property settings so that deprecated fields product system warnings.
+ - [metadata-decorators](https://github.com/hippo-oss/metadata-decorators) implements a flavor that persists decorator
+   metadata using `reflect-metadata`.
+
+ - [deprecation-decorators](https://github.com/hippo-oss/deprecation-decorators) implements a flavor that raises a system
+   warnings when a deprecated property is set.
 
 
 ## Decorator Composition
@@ -73,7 +81,7 @@ class Example {
 }
 ```
 
-## Avaialble Decorators
+## Available Decorators
 
 The following decorators are supported:
 

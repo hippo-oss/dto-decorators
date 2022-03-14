@@ -1,4 +1,4 @@
-import { DTODecoratorFactories } from '../types';
+import { DTODecoratorFactories } from './types';
 
 const noop = () => null;
 const noopFactory = () => noop;

@@ -1,4 +1,4 @@
-import { NOOP_DECORATORS } from './noop';
+import { NOOP_DECORATORS } from './decorators';
 import {
     DTODecoratorFactories,
     DTODecoratorName,
