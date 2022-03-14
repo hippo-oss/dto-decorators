@@ -1,8 +1,12 @@
 # Changelog
 
+## [0.3.1]
+
+ - Expose `src` and `dist` in package.
+
 ## [0.3.0]
 
- - Provide `noop` decorator export using destructuing.
+ - Provide `noop` decorator export using destructuring.
 
 ## [0.2.0]
 
