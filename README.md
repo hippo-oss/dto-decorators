@@ -45,9 +45,6 @@ This library comes with three flavors of decorators that rely on a minimal set o
 
  - `NOOP_DECORATORS` do nothing; they simply implement the decorator API contract.
 
- - `METADATA_DECORATORS` persist store metadata using `reflect-metadata`; other systems may use this persistence to
-   implement runtime logic that is aware of decorated attributes.
-
  - `DEPRECATION_DECORATORS` override property settings so that deprecated fields product system warnings.
 
 
