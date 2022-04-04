@@ -18,22 +18,18 @@ describe('decorators', () => {
         }
 
         class FixtureChild {
-            @IsString({
-            })
+            @IsString()
             name!: string;
         }
 
         class Fixture {
-            @IsBoolean({
-            })
+            @IsBoolean()
             booleanValue!: boolean;
 
-            @IsDate({
-            })
+            @IsDate()
             dateValue!: Date;
 
-            @IsDateString({
-            })
+            @IsDateString()
             dateStringValue!: string;
 
             @IsEnum({
@@ -41,8 +37,7 @@ describe('decorators', () => {
             })
             enumValue!: FixtureEnum;
 
-            @IsInteger({
-            })
+            @IsInteger()
             integerValue!: number;
 
             @IsNested({
@@ -50,16 +45,13 @@ describe('decorators', () => {
             })
             nestedValue!: FixtureChild;
 
-            @IsNumber({
-            })
+            @IsNumber()
             numberValue!: number;
 
-            @IsString({
-            })
+            @IsString()
             stringValue!: string;
 
-            @IsUUID({
-            })
+            @IsUUID()
             uuidValue!: string;
         }
 
