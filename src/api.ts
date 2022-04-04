@@ -1,9 +1,11 @@
+import {
+    composePropertyDecoratorFactories,
+    selectPropertyDecoratorFactories,
+} from './composition';
 import { NOOP_DECORATORS } from './decorators';
 import {
     DTODecoratorFactories,
     DTODecoratorName,
-    composePropertyDecoratorFactories,
-    selectPropertyDecoratorFactories,
 } from './types';
 
 /* Consumers that wish to define their own behavior may compose sets of these decorator factories together.
