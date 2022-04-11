@@ -2,9 +2,11 @@ import { BaseOptions } from './base.options';
 
 /* We need a type to differentiate between plain objects and classes.
  */
-export type Constructor<T> = {
-    new(...args: unknown[]): T;
-};
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+export interface Constructor<T = any> extends Function {
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    new(...args: any[]): T;
+}
 
 /* Define a type guard to detect if an instance is a constructable class.
  */
