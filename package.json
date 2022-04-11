@@ -1,6 +1,6 @@
 {
     "name": "@hippo-oss/dto-decorators",
-    "version": "0.4.0",
+    "version": "0.4.1",
     "description": "DTO type decorators.",
     "main": "./dist/index.js",
     "repository": "https://github.com/hippo-oss/dto-decorators",
