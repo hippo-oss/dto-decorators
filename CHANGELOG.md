@@ -1,5 +1,9 @@
 # Changelog
 
+## Unreleased
+
+ - Allow decorator factories to have optional inputs.
+
 ## [0.3.1]
 
  - Expose `src` and `dist` in package.
