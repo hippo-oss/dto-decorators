@@ -10,9 +10,11 @@ import {
 
 /* Consumers that wish to define their own behavior may compose sets of these decorator factories together.
  */
-export function composeDecoratorFactories(
-    factories: DTODecoratorFactories[],
-): DTODecoratorFactories {
+export function composeDecoratorFactories<
+    CustomDTODecoratorFactories extends DTODecoratorFactories = DTODecoratorFactories,
+>(
+    factories: (DTODecoratorFactories | CustomDTODecoratorFactories)[],
+): CustomDTODecoratorFactories {
     return Object.keys(NOOP_DECORATORS).reduce(
         (acc, name) => ({
             ...acc,
@@ -23,6 +25,6 @@ export function composeDecoratorFactories(
                 ),
             ),
         }),
-        {} as DTODecoratorFactories,
+        {} as CustomDTODecoratorFactories,
     );
 }
