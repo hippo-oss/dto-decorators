@@ -1,5 +1,9 @@
 # Changelog
 
+## [0.5.0]
+
+- Add `hasXPropertiesDefined` option to `IsNested` decorator.
+
 ## [0.4.0]
 
  - Allow decorator factories to have optional inputs.

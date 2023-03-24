@@ -16,4 +16,5 @@ export function isClass<T>(target: unknown): target is Constructor<T> {
 
 export interface IsNestedOptions extends BaseOptions {
     type: Constructor<unknown>,
+    hasXPropertiesDefined?: number,
 }
